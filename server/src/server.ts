@@ -1,10 +1,8 @@
-import fastify from 'fastify'
-import { PrismaClient } from '@prisma/client'
+import fastify from 'fastify' // Importando o Fastify
+import { PrismaClient } from '@prisma/client' // Importando o Prisma
 
-const app = fastify()
-const prisma = new PrismaClient()
-
-
+const app = fastify() // Configurando o Fastify em app
+const prisma = new PrismaClient() // Criando um DB
 
 app.get('/users', async () => {
   const users = await prisma.user.findMany()
@@ -12,11 +10,11 @@ app.get('/users', async () => {
   return users
 })
 
-
-
 // Iniciando o servidor
-app.listen({
-  port: 3333,
-}).then(() => {
-  console.log('Servidor rodando na porta: http://localhost:3333')
-})
+app
+  .listen({
+    port: 3333,
+  })
+  .then(() => {
+    console.log('Servidor rodando na porta: http://localhost:3333')
+  })
