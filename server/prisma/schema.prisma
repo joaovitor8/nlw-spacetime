@@ -7,11 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//Tabela User
 model User {
-  id        String @id @default(uuid()) //gerando um id unico universal
+  id        String @id @default(uuid())
   githubId  Int    @unique
-  nome      String
+  name      String
   login     String
   avatarUrl String
 
@@ -19,12 +18,13 @@ model User {
 }
 
 model Memory {
-  id        String   @id @default(uuid())
+  id     String @id @default(uuid())
+  userId String
+
   coverUrl  String
   content   String
   isPublic  Boolean  @default(false)
   createdAt DateTime @default(now())
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  user User @relation(fields: [userId], references: [id])
 }
