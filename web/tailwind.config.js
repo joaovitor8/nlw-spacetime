@@ -16,7 +16,7 @@ module.exports = {
         gray: {
           50: '#eaeaea',
           100: '#bebebf',
-          200: '#9e9ea8',
+          200: '#9e9ea0',
           300: '#727275',
           400: '#56565a',
           500: '#2c2c31',
@@ -25,7 +25,6 @@ module.exports = {
           800: '#18181b',
           900: '#121215',
         },
-
         purple: {
           50: '#f3eefc',
           100: '#d8cbf7',
@@ -38,8 +37,7 @@ module.exports = {
           800: '#48307e',
           900: '#372560',
         },
-
-        grey: {
+        green: {
           50: '#e6fbef',
           100: '#b1f1ce',
           200: '#8cebb6',
@@ -55,7 +53,7 @@ module.exports = {
 
       backgroundImage: {
         stripes:
-          'linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 12.5%, transparent 12.5%. transparent)',
+          'linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 12.5%, transparent 12.5%, transparent)',
       },
 
       fontSize: {
@@ -71,5 +69,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }
