@@ -1,11 +1,10 @@
-import { useEffect } from 'react'
-import { useRouter } from 'expo-router'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { makeRedirectUri, useAuthRequest } from 'expo-auth-session'
-import * as SecureStore from 'expo-secure-store'
-
-import NLWLogo from '../src/assets/nlw-spacetime-logo.svg'
-import { api } from '../src/lib/api'
+import { Text, TouchableOpacity, View } from 'react-native' //Componentes do ReactNative
+import { useRouter } from 'expo-router' //Rota
+import { useEffect } from 'react' //Hook do react
+import { makeRedirectUri, useAuthRequest } from 'expo-auth-session' //Autentificação
+import * as SecureStore from 'expo-secure-store' //Segurança
+import { api } from '../src/lib/api' //API
+import NLWLogo from '../src/assets/nlw-spacetime-logo.svg' //Asset
 
 const discovery = {
   authorizationEndpoint: 'https://github.com/login/oauth/authorize',
@@ -19,7 +18,7 @@ export default function App() {
 
   const [, response, signInWithGithub] = useAuthRequest(
     {
-      clientId: 'd26f194cc5d5132a51be',
+      clientId: 'd26f194cc5d5132a51be', //???
       scopes: ['identity'],
       redirectUri: makeRedirectUri({
         scheme: 'nlwspacetime',
@@ -34,9 +33,7 @@ export default function App() {
     })
 
     const { token } = response.data
-
     await SecureStore.setItemAsync('token', token)
-
     router.push('/memories')
   }
 
@@ -61,29 +58,16 @@ export default function App() {
         <NLWLogo />
 
         <View className="space-y-2">
-          <Text className="text-center font-title text-2xl leading-tight text-gray-50">
-            Sua cápsula do tempo
-          </Text>
-          <Text className="text-center font-body text-base leading-relaxed text-gray-100">
-            Colecione momentos marcantes da sua jornada e compartilhe (se
-            quiser) com o mundo!
-          </Text>
+          <Text className="text-center font-title text-2xl leading-tight text-gray-50">Sua cápsula do tempo</Text>
+          <Text className="text-center font-body text-base leading-relaxed text-gray-100">Colecione momentos marcantes da sua jornada e compartilhe (se quiser) com o mundo!</Text>
         </View>
 
-        <TouchableOpacity
-          activeOpacity={0.7}
-          className="rounded-full bg-green-500 px-5 py-2"
-          onPress={() => signInWithGithub()}
-        >
-          <Text className="font-alt text-sm uppercase text-black">
-            Cadastrar lembrança
-          </Text>
+        <TouchableOpacity activeOpacity={0.7} className="rounded-full bg-green-500 px-5 py-2" onPress={() => signInWithGithub()}>
+          <Text className="font-alt text-sm uppercase text-black">Cadastrar lembrança</Text>
         </TouchableOpacity>
       </View>
 
-      <Text className="text-center font-body text-sm leading-relaxed text-gray-200">
-        Feito com 💜 no NLW da Rocketseat
-      </Text>
+      <Text className="text-center font-body text-sm leading-relaxed text-gray-200">Feito com 💜 no NLW da Rocketseat</Text>
     </View>
   )
 }

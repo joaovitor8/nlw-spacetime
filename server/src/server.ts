@@ -30,11 +30,7 @@ app.register(authRoutes)
 app.register(uploadRoutes)
 app.register(memoriesRoutes)
 
-app
-  .listen({
-    port: 3333,
-    host: '0.0.0.0',
-  })
-  .then(() => {
-    console.log('🚀 HTTP server running on port http://localhost:3333')
-  })
+app.listen({
+  port: 3333,
+  host: '0.0.0.0',
+}).then(() => { console.log('Servidor rodando na porta http://localhost:3333') })

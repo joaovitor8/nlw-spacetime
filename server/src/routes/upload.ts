@@ -1,6 +1,6 @@
+import { FastifyInstance } from 'fastify'
 import { randomUUID } from 'node:crypto'
 import { extname, resolve } from 'node:path'
-import { FastifyInstance } from 'fastify'
 import { createWriteStream } from 'node:fs'
 import { pipeline } from 'node:stream'
 import { promisify } from 'node:util'

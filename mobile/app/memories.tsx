@@ -1,14 +1,14 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import Icon from '@expo/vector-icons/Feather'
-import * as SecureStore from 'expo-secure-store'
-
-import NLWLogo from '../src/assets/nlw-spacetime-logo.svg'
-import { Link, useRouter } from 'expo-router'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native' //Componentes do ReactNative
+import { Link, useRouter } from 'expo-router' //Rota
+import { useEffect, useState } from 'react' //Hooks do react
+import * as SecureStore from 'expo-secure-store' //Segurança
+import { useSafeAreaInsets } from 'react-native-safe-area-context' //???
+import { api } from '../src/lib/api' //API
 import ptBR from 'dayjs/locale/pt-br'
-import { api } from '../src/lib/api'
+import dayjs from 'dayjs'
+
+import NLWLogo from '../src/assets/nlw-spacetime-logo.svg' //Asset
+import Icon from '@expo/vector-icons/Feather' //Asset
 
 dayjs.locale(ptBR)
 
@@ -20,13 +20,12 @@ interface Memory {
 }
 
 export default function NewMemory() {
+  const [memories, setMemories] = useState<Memory[]>([])
   const { bottom, top } = useSafeAreaInsets()
   const router = useRouter()
-  const [memories, setMemories] = useState<Memory[]>([])
 
   async function signOut() {
     await SecureStore.deleteItemAsync('token')
-
     router.push('/')
   }
 
@@ -47,18 +46,12 @@ export default function NewMemory() {
   }, [])
 
   return (
-    <ScrollView
-      className="flex-1"
-      contentContainerStyle={{ paddingBottom: bottom, paddingTop: top }}
-    >
+    <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: bottom, paddingTop: top }}>
       <View className="mt-4 flex-row items-center justify-between px-8">
         <NLWLogo />
 
         <View className="flex-row gap-2">
-          <TouchableOpacity
-            onPress={signOut}
-            className="h-10 w-10 items-center justify-center rounded-full bg-red-500"
-          >
+          <TouchableOpacity onPress={signOut} className="h-10 w-10 items-center justify-center rounded-full bg-red-500">
             <Icon name="log-out" size={16} color="#000" />
           </TouchableOpacity>
 
@@ -80,22 +73,14 @@ export default function NewMemory() {
                   {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
                 </Text>
               </View>
+              
               <View className="space-y-4 px-8">
-                <Image
-                  source={{
-                    uri: memory.coverUrl,
-                  }}
-                  className="aspect-video w-full rounded-lg"
-                  alt=""
-                />
-                <Text className="font-body text-base leading-relaxed text-gray-100">
-                  {memory.excerpt}
-                </Text>
+                <Image source={{ uri: memory.coverUrl }} className="aspect-video w-full rounded-lg" alt="" />
+                <Text className="font-body text-base leading-relaxed text-gray-100">{memory.excerpt}</Text>
+
                 <Link href="/memories/id" asChild>
                   <TouchableOpacity className="flex-row items-center gap-2">
-                    <Text className="font-body text-sm text-gray-200">
-                      Ler mais
-                    </Text>
+                    <Text className="font-body text-sm text-gray-200">Ler mais</Text>
                     <Icon name="arrow-right" size={16} color="#9e9ea0" />
                   </TouchableOpacity>
                 </Link>

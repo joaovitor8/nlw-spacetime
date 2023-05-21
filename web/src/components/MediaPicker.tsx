@@ -19,22 +19,11 @@ export function MediaPicker() {
 
   return (
     <>
-      <input
-        onChange={onFileSelected}
-        type="file"
-        name="coverUrl"
-        id="media"
-        accept="image/*"
-        className="invisible h-0 w-0"
-      />
+      <input onChange={onFileSelected} type="file" name="coverUrl" id="media" accept="image/*" className="invisible h-0 w-0"/>
 
       {preview && (
         // eslint-disable-next-line
-        <img
-          src={preview}
-          alt=""
-          className="aspect-video w-full rounded-lg object-cover"
-        />
+        <img src={preview} alt="" className="aspect-video w-full rounded-lg object-cover"/>
       )}
     </>
   )
